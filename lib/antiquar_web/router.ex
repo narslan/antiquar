@@ -17,7 +17,9 @@ defmodule AntiquarWeb.Router do
   scope "/", AntiquarWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", CollectionLive, :index
+    live "/artists/:id", ArtistLive, :show
+    live "/artists/:id/artworks", ArtistArtworksLive, :index
   end
 
   # Other scopes may use custom stacks.

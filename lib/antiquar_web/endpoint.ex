@@ -25,6 +25,7 @@ defmodule AntiquarWeb.Endpoint do
     from: :antiquar,
     gzip: not code_reloading?,
     only: AntiquarWeb.static_paths(),
+    only_matching: ["uploads"],
     raise_on_missing_only: code_reloading?
 
   # Code reloading can be explicitly enabled under the

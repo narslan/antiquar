@@ -25,6 +25,14 @@ import {LiveSocket} from "phoenix_live_view"
 import {hooks as colocatedHooks} from "phoenix-colocated/antiquar"
 import topbar from "../vendor/topbar"
 
+const setTheme = theme => {
+  localStorage.setItem("phx:theme", theme)
+  document.documentElement.setAttribute("data-theme", theme)
+}
+
+setTheme(localStorage.getItem("phx:theme") || "light")
+window.addEventListener("phx:set-theme", event => setTheme(event.target.dataset.phxTheme))
+
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
@@ -80,4 +88,3 @@ if (process.env.NODE_ENV === "development") {
     window.liveReloader = reloader
   })
 }
-
